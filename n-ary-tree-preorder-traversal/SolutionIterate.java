@@ -16,16 +16,18 @@ class Node {
     }
 };
 */
-class Solution {
+class SolutionIterate {
     public List<Integer> preorder(Node root) {
         List<Integer> result = new LinkedList<>();
-        Deque<Node> queue = new LinkedList<>();
-        queue.add(root);
-        while(!queue.isEmpty()){
-            root = queue.pop();
+        Stack<Node> stack = new Stack<>();
+        stack.add(root);
+        while(!stack.isEmpty()){
+            root = stack.pop();
             if(root != null){
                 result.add(root.val);
-                queue.addAll(root.children);
+                for(int i = root.children.size() - 1; i >=0; i--){
+                    stack.add(root.children.get(i));
+                }
             }
         }
         return result;
